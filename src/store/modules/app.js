@@ -5,6 +5,7 @@ const state = {
     userName: '',
     sidebar: {
         opened: !+getStore("sidebarStatus")
+        // opened: true
     },
     visitedViews: []
 };

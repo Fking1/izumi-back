@@ -1,7 +1,7 @@
 import { getStore, setStore, removeStore } from "./store";
 
-const adminId = "ADMIN-ID";
-const adminToken = "ADMIN-TOKEN";
+const userId = "USER_ID";
+// const adminToken = "ADMIN-TOKEN";
 
 // 获取token
 // export function getToken() {
@@ -19,16 +19,16 @@ const adminToken = "ADMIN-TOKEN";
 // }
 
 // 获取admin_id
-export function getAdminId() {
-    return getStore(adminId);
+export function getUserId() {
+    return getStore(userId);
 }
 
 // 设置admin_id
-export function setAdminId(id) {
-    return setStore(adminId, id, 365);
+export function setUserId(id) {
+    return setStore(userId, id, 365);
 }
 
 // 删除admin_id
-export function removeAdminId() {
-    return removeStore(adminId);
+export function removeUserId() {
+    return removeStore(userId);
 }

@@ -35,6 +35,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         let validatepassword = (rule, value, callback) => {
@@ -46,8 +47,8 @@ export default {
         }
         return {
             ruleForm: {
-                username: "fang",
-                password: "yong",
+                username: "admin",
+                password: "admin",
                 checked: true
             },
             rules: {
@@ -68,6 +69,7 @@ export default {
                     this.$store
                         .dispatch("loginName", this.ruleForm)
                         .then(response => {
+                            console.log(response)
                             this.loading = false;
                             if (response.status) {
                                 this.$message.error(response.message);
@@ -96,7 +98,7 @@ export default {
         if (query.redirect) {
             // URL Encode
             this.redirect = decodeURIComponent(query.redirect);
-        }
+        } 
     }
 };
 </script>

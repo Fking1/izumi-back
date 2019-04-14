@@ -16,7 +16,7 @@ export default new Vuex.Store({
         app,
         admin
     },
-    // strict: process.env.NODE_ENV === 'development'?true:false 
+    // strict: process.env.NODE_ENV !== 'production'
 })
 
 // 引入Vuex、使用Vuex、定义state对象、暴露接口

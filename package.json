@@ -11,7 +11,9 @@
     "axios": "^0.18.0",
     "element-ui": "^2.7.2",
     "js-cookie": "^2.2.0",
+    "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.11.0",
+    "nprogress": "^0.2.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

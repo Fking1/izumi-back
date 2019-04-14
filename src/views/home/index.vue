@@ -22,7 +22,7 @@
             </el-menu>
         </el-scrollbar>
 
-        <el-container class="container-box" v-bind:class="{'slide-hide': isCollapse, 'slide-in-left': menuShow}">
+        <el-container class="container-box" :class="{'slide-hide': isCollapse, 'slide-in-left': menuShow}">
             <el-header class="header">
                 <div class="header-left">
                     <div class="slide-toggle" :class="{'slide-toggle-open': isCollapse}" @click="toggleSideBar">
@@ -161,13 +161,15 @@ export default {
     },
     computed: {
         ...mapGetters({
+            // username: "username",
             routers: "routers"
         }),
         onRoutes() {
             return this.$route.path;
         },
         username() {
-            let username = this.$store.state.admin.userName;
+            let username = this.$store.state.admin.username;
+            
             return !username ? this.name : username;
         },
         isCollapse() {
@@ -194,8 +196,10 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    this.$store.dispatch("loginOut").then(() => {
-                        location.reload(); // 为了重新实例化vue-router对象 避免bug
+                    this.$store.dispatch("loginOut").then((response) => {
+                        this.$router.push({
+                            path: '/login'
+                        })
                     });
                 })
                 .catch(() => {
@@ -452,9 +456,9 @@ export default {
     }
 }
 
-/*.slide-hide {*/
-/*width: 64px !important;*/
-/*}*/
+.slide-hide {
+width: 64px !important;
+}
 
 @media screen and (max-width: 768px) {
     .slide-hide.slide-in-left {

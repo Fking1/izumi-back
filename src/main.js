@@ -4,9 +4,12 @@ import router from '@/router'
 import store from '@/store/index.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import "@/role"; // 权限
 
 import "./assets/icons/iconfont";// 阿里iconfont图表库
 import IconSvg from "./components/common/IconSvg.vue"; // svg组件
+
+import '@/mock'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)

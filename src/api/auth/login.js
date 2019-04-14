@@ -1,8 +1,8 @@
 import axios from '@/utils/axios.js'
 
-export function loginName(username, password) {
+export function login(username, password) {
     return axios({
-        url: "/auth/login",
+        url: "/admin/auth/login/index",
         method: "post",
         data: {username, password}
     });
@@ -25,5 +25,8 @@ export function password(data) {
 }
 
 export function userInfo() {
-    
+    return axios({
+        url: "/admin/auth/login/userInfo",
+        method: "get"
+    })
 }

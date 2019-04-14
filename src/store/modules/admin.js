@@ -1,35 +1,30 @@
-import { loginName, logout, userInfo } from "../../api/auth/login";
+import { login, logout, userInfo } from "../../api/auth/login";
 import * as types from "../mutation-types";
 import {routes} from "@/router.js";
 
 import {
-    // getToken,
-    // setToken,
-    // removeToken,
-    getAdminId,
-    setAdminId,
-    removeAdminId
+    getUserId,
+    setUserId,
+    removeUserId
 } from "../../utils/auth";
 // import { $NOT_NETWORK } from '../../utils/errorCode'
 import { Message } from "element-ui";
 
 // initial state
 const state = {
-    // adminId: getAdminId(), // id
-    userName: "fking", // 昵称
-    // avatar: "", // 头像
-    // token: getToken(), // 登录token
-    // authRules: [], // 权限列表
+    userId: "", // id
+    username: "", // 昵称
+    avatar: "",
+    sex: "",
     routers: routes // 路由列表
 };
 
 // getters
 const getters = {
-    // adminId: state => state.adminId,
-    userName: state => state.userName,
-    // avatar: state => state.avatar,
-    // token: state => state.token,
-    // authRules: state => state.authRules,
+    userId: state => state.userId,
+    username: state => state.username,
+    avatar: state => state.avatar,
+    sex: state => state.sex,
     routers: state => state.routers
 };
 
@@ -40,23 +35,22 @@ const actions = {
         const username = userInfo.username ? userInfo.username.trim() : "";
         const password = userInfo.password ? userInfo.password : "";
         return new Promise((resolve, reject) => {
-            loginName(username, password)
+            login(username, password)
                 .then(response => {
                     if (response.status) {
                         Message({
                             message: response.message,
                             type: "error",
-                            duration: 5 * 1000
+                            duration: 3 * 1000
                         });
                     } else {
                         Message({
                             message: response.message,
                             type: "success",
-                            duration: 5 * 1000
+                            duration: 3 * 1000
                         });
-                        commit(types.RECEIVE_ADMIN_ID, response.userId);
-                        // commit(types.RECEIVE_ADMIN_TOKEN, data.token);
-                        // commit(types.RECEIVE_ADMIN_AUTH_RULES, []);
+                        commit(types.RECEIVE_USER_ID, response.userId);
+                        commit(types.RECEIVE_USERNAME, response.username);
                     }
                     resolve(response);
                 })
@@ -69,11 +63,12 @@ const actions = {
         return new Promise((resolve, reject) => {
             userInfo()
                 .then(response => {
-                    const data = response.data || {};
-                    commit(types.RECEIVE_ADMIN_NAME, data.username);
-                    commit(types.RECEIVE_ADMIN_AVATAR, data.avatar);
-                    commit(types.RECEIVE_ADMIN_AUTH_RULES, data.authRules);
-                    resolve(data);
+                    // const data = response.data || {};
+                    console.log("userinfo...")
+                    console.log(response)
+                    commit(types.RECEIVE_USERNAME, response.username);
+                    commit(types.RECEIVE_AVATAR, response.avatar);
+                    resolve(response);
                 })
                 .catch(error => {
                     reject(error);
@@ -84,11 +79,24 @@ const actions = {
     loginOut({ commit }) {
         return new Promise((resolve, reject) => {
             logout()
-                .then(() => {
-                    commit(types.RECEIVE_ADMIN_ID, "");
+                .then(response => {
+                    if(response.status) {
+                        Message({
+                            message: response.message,
+                            type: "error",
+                            duration: 3 * 1000
+                        });
+                    }else {
+                        Message({
+                            message: response.message,
+                            type: "success",
+                            duration: 3 * 1000
+                        });
+                        commit(types.RECEIVE_USER_ID, "");
+                    }
                     // commit(types.RECEIVE_ADMIN_TOKEN, "");
                     // commit(types.RECEIVE_ADMIN_AUTH_RULES, []);
-                    resolve();
+                    resolve(response);
                 })
                 .catch(error => {
                     reject(error);
@@ -121,31 +129,20 @@ const actions = {
 
 // mutations
 const mutations = {
-    [types.RECEIVE_ADMIN_ID](state, adminId) {
-        state.adminId = adminId;
-        if (adminId === "") {
-            removeAdminId();
+    [types.RECEIVE_USER_ID](state, userId) {
+        state.userId = userId;
+        if (userId === "") {
+            removeUserId();
         } else {
-            setAdminId(adminId);
+            setUserId(userId);
         }
     },
-    // [types.RECEIVE_ADMIN_TOKEN](state, token) {
-    //     state.token = token;
-    //     if (token === "") {
-    //         removeToken();
-    //     } else {
-    //         setToken(token);
-    //     }
-    // },
-    // [types.RECEIVE_ADMIN_NAME](state, userName) {
-    //     state.userName = userName;
-    // },
-    // [types.RECEIVE_ADMIN_AVATAR](state, avatar) {
-    //     state.avatar = avatar;
-    // },
-    // [types.RECEIVE_ADMIN_AUTH_RULES](state, authRules) {
-    //     state.authRules = authRules;
-    // },
+    [types.RECEIVE_USERNAME](state, username) {
+        state.username = username
+    },
+    [types.RECEIVE_AVATAR](state, avatar) {
+        state.avatar = avatar;
+    },
     // [types.RECEIVE_ROUTERS](state, routers) {
     //     const tempRm = constantRouterMap.concat(routers);
     //     state.routers = JSON.parse(JSON.stringify(tempRm));
