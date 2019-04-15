@@ -977,11 +977,17 @@ const save = {
 };
 
 const edit = {
-    code: 0,
-    message: "success"
+    data: {
+        status: 0,
+        message: "success"
+    }
 };
 
-const del = { code: 0, message: "success" };
+const del = { 
+    data: {
+        status: 0, message: "success"
+    }
+};
 
 export default {
     index,

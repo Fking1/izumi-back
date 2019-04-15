@@ -1,5 +1,6 @@
+// import "babel-polyfill"; // 解决Ie9
 import Vue from 'vue'
-import App from './App.vue'
+import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store/index.js'
 import ElementUI from 'element-ui'

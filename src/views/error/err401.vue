@@ -1,7 +1,7 @@
 <template>
     <div class="error401">
         <div class="error401-body-con">
-            <div class="error401-body-con-title">4<span class="error401-0-span">0</span><span class="error401-key-span">3</span></div>
+            <div class="error401-body-con-title">4<span class="error401-0-span">0</span><span class="error401-key-span">1</span></div>
             <p class="error401-body-con-message">You don't have permission</p>
             <div class="error401-btn-con">
                 <a class="error401-home-button" href="/">返回首页</a>

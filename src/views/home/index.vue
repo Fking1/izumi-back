@@ -95,7 +95,7 @@
 import { mapGetters } from "vuex";
 import SidebarItem from "./SidebarItem.vue";
 import { password } from "../../api/auth/login";
-import { getAdminId } from "../../utils/auth";
+import { getUserId } from "../../utils/auth";
 export default {
     data() {
         let validatePass = (rule, value, callback) => {
@@ -169,8 +169,7 @@ export default {
         },
         username() {
             let username = this.$store.state.admin.username;
-            
-            return !username ? this.name : username;
+            return !username ? this.username : username;
         },
         isCollapse() {
             return this.$store.state.app.sidebar.opened;
@@ -195,19 +194,19 @@ export default {
                 cancelButtonText: "取消",
                 type: "warning"
             })
-                .then(() => {
-                    this.$store.dispatch("loginOut").then((response) => {
-                        this.$router.push({
-                            path: '/login'
-                        })
-                    });
-                })
-                .catch(() => {
-                    this.$message({
-                        type: "error",
-                        message: "操作失败"
-                    });
+            .then(() => {
+                this.$store.dispatch("loginOut").then((response) => {
+                    this.$router.push({
+                        path: '/login'
+                    })
                 });
+            })
+            .catch(() => {
+                // this.$message({
+                //     type: "error",
+                //     message: "操作失败"
+                // });
+            });
         },
         // 显示修改密码界面
         handlePassword() {
@@ -223,21 +222,12 @@ export default {
                 if (valid) {
                     this.passwordLoading = true;
                     let data = Object.assign({}, this.passwordFormData);
-                    data.adminId = getAdminId();
+                    data.userId = getUserId();
                     password(data)
                         .then(res => {
                             this.passwordLoading = false;
-                            if (res.status) {
-                                this.$message({
-                                    message: res.message,
-                                    type: "error"
-                                });
-                            } else {
-                                this.$message({
-                                    message: "修改成功",
-                                    type: "success"
-                                });
-                                // 刷新表单
+                            console.log(res.data)
+                            if (!res.data.status) {
                                 this.$refs["passwordFormData"].resetFields();
                                 this.passwordFormVisible = false;
                                 this.$store.dispatch("loginOut").then(() => {
@@ -246,10 +236,10 @@ export default {
                             }
                         })
                         .catch(() => {
-                            this.$message({
-                                type: "error",
-                                message: "操作失败"
-                            });
+                            // this.$message({
+                            //     type: "error",
+                            //     message: "操作失败"
+                            // });
                         });
                 }
             });

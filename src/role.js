@@ -1,16 +1,17 @@
-import router from '@/router'
 import store from "./store/index";
 import NProgress from "nprogress"; // Progress 进度条
 import "nprogress/nprogress.css"; // Progress 进度条样式
 import { getUserId } from "./utils/auth"; // 验权
 import { Message } from "element-ui";
-// import { asyncRouterMap } from "./router/index";
+import router from '@/router.js'
+import { asyncRouterMap } from "./router.js";
 
 // permissiom judge
+// permissionAuthRules 事先规定好的允许通过的集合
 function hasRole(authRules, permissionAuthRules) {
     if (!authRules || authRules.length <= 0) {
         return false;
-    }
+    }// 如果没有authRules 则返回false
     if (authRules.indexOf("admin") >= 0) return true; // admin权限 直接通过
     if (!permissionAuthRules) return true;
     return authRules.some(role => permissionAuthRules.indexOf(role) >= 0);
@@ -35,7 +36,7 @@ function hasRouterRole(authRules, route) {
 }
 
 /**
- * 递归过滤异步路由表，返回符合用户角色权限的路由表
+ * 递归过滤异步路由表，返回匹配用户角色权限的路由表
  * @param asyncRouterMap
  * @param authRules
  */
@@ -53,7 +54,7 @@ function filterAsyncRouter(asyncRouterMap, authRules) {
 }
 
 // register global progress.
-const whiteList = ["/login", "/401", "/404", "/500","/readme/main"]; // 不重定向白名单
+const whiteList = ["/login", "/401", "/404", "/500"]; // 不重定向白名单
 router.beforeEach((to, from, next) => {
     NProgress.start(); // 开启Progress
     if (whiteList.indexOf(to.path) !== -1) {
@@ -91,8 +92,9 @@ router.beforeEach((to, from, next) => {
                         NProgress.done();
                         return;
                     }
+
                     let accessedRouters = filterAsyncRouter(
-                        // asyncRouterMap,
+                        asyncRouterMap,
                         authRules
                     );
                     // 生成可访问的路由表
@@ -105,7 +107,6 @@ router.beforeEach((to, from, next) => {
                 })
                 .catch(() => {
                     store.dispatch("fedLogout").then(() => {
-                        Message.error("验证失败,请重新登录");
                         let redirect = to.fullPath;
                         store.dispatch("loginOut").then(() => {
                             next({
@@ -118,10 +119,11 @@ router.beforeEach((to, from, next) => {
             return;
         }
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
+        // 如果有authRules 并且to.meta.authRule 存在的话 允许跳转
         if (hasRole(store.getters.authRules, to.meta.authRule)) {
-            next(); //
+            next(); 
             return;
-        }
+        }// 否则401
         next({
             path: "/401",
             query: { noGoBack: true }

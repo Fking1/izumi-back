@@ -221,7 +221,7 @@ export default {
             this.authList = [];
             authRoleAuthList({ id: roleId })
                 .then(response => {
-                    if (response.code) {
+                    if (response.status) {
                         this.authFormVisible = false;
                         this.$message({
                             message: response.message,
@@ -290,7 +290,7 @@ export default {
             authRoleAuth(this.authFormData)
                 .then(response => {
                     this.authLoading = false;
-                    if (response.code) {
+                    if (response.status) {
                         this.$message.error(response.message);
                         return false;
                     }
@@ -338,7 +338,7 @@ export default {
                     authRoleSave(data, this.formName)
                         .then(response => {
                             this.formLoading = false;
-                            if (response.code) {
+                            if (response.status) {
                                 this.$message.error(response.message);
                                 return false;
                             }
@@ -374,7 +374,7 @@ export default {
                         authRoleDelete(para)
                             .then(response => {
                                 this.deleteLoading = false;
-                                if (response.code) {
+                                if (response.status) {
                                     this.$message.error(response.message);
                                     return false;
                                 }

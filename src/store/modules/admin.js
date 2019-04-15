@@ -1,30 +1,35 @@
 import { login, logout, userInfo } from "../../api/auth/login";
 import * as types from "../mutation-types";
-import {routes} from "@/router.js";
+import {constantRouterMap} from "@/router.js";
 
 import {
     getUserId,
     setUserId,
-    removeUserId
+    removeUserId,
+    getToken,
+    setToken,
+    removeToken
 } from "../../utils/auth";
 // import { $NOT_NETWORK } from '../../utils/errorCode'
 import { Message } from "element-ui";
 
 // initial state
 const state = {
-    userId: "", // id
+    userId: getUserId(), // id
+    token: getToken(),
     username: "", // 昵称
     avatar: "",
-    sex: "",
-    routers: routes // 路由列表
+    authRules: [],
+    routers: constantRouterMap // 路由列表
 };
 
 // getters
 const getters = {
     userId: state => state.userId,
+    token: state => state.token,
     username: state => state.username,
     avatar: state => state.avatar,
-    sex: state => state.sex,
+    authRules: state => state.authRules,
     routers: state => state.routers
 };
 
@@ -37,22 +42,13 @@ const actions = {
         return new Promise((resolve, reject) => {
             login(username, password)
                 .then(response => {
-                    if (response.status) {
-                        Message({
-                            message: response.message,
-                            type: "error",
-                            duration: 3 * 1000
-                        });
-                    } else {
-                        Message({
-                            message: response.message,
-                            type: "success",
-                            duration: 3 * 1000
-                        });
-                        commit(types.RECEIVE_USER_ID, response.userId);
-                        commit(types.RECEIVE_USERNAME, response.username);
-                    }
-                    resolve(response);
+                    const data = response.data || {};
+                    if (!data.status) {
+                        commit(types.RECEIVE_USER_ID, data.userId);
+                        commit(types.RECEIVE_TOKEN, data.token);
+                        commit(types.RECEIVE_AUTH_RULES, []);
+                    } 
+                    resolve(data)
                 })
                 .catch(error => {
                     reject(error);
@@ -63,12 +59,11 @@ const actions = {
         return new Promise((resolve, reject) => {
             userInfo()
                 .then(response => {
-                    // const data = response.data || {};
-                    console.log("userinfo...")
-                    console.log(response)
-                    commit(types.RECEIVE_USERNAME, response.username);
-                    commit(types.RECEIVE_AVATAR, response.avatar);
-                    resolve(response);
+                    const data = response.data || {};
+                    commit(types.RECEIVE_USERNAME, data.username);
+                    commit(types.RECEIVE_AVATAR, data.avatar);
+                    commit(types.RECEIVE_AUTH_RULES, data.authRules);
+                    resolve(data);
                 })
                 .catch(error => {
                     reject(error);
@@ -80,23 +75,13 @@ const actions = {
         return new Promise((resolve, reject) => {
             logout()
                 .then(response => {
-                    if(response.status) {
-                        Message({
-                            message: response.message,
-                            type: "error",
-                            duration: 3 * 1000
-                        });
-                    }else {
-                        Message({
-                            message: response.message,
-                            type: "success",
-                            duration: 3 * 1000
-                        });
-                        commit(types.RECEIVE_USER_ID, "");
+                    let data = response.data || {}
+                    if(!data.status) {
+                        commit(types.RECEIVE_USER_ID, "");  
+                        commit(types.RECEIVE_TOKEN, "");
+                        commit(types.RECEIVE_AUTH_RULES, []);                      
                     }
-                    // commit(types.RECEIVE_ADMIN_TOKEN, "");
-                    // commit(types.RECEIVE_ADMIN_AUTH_RULES, []);
-                    resolve(response);
+                    resolve(data);
                 })
                 .catch(error => {
                     reject(error);
@@ -105,26 +90,26 @@ const actions = {
     },
 
     // // 前端 登出
-    // fedLogout({ commit }) {
-    //     return new Promise(resolve => {
-    //         commit(types.RECEIVE_ADMIN_ID, "");
-    //         commit(types.RECEIVE_ADMIN_TOKEN, "");
-    //         commit(types.RECEIVE_ADMIN_AUTH_RULES, []);
-    //         resolve();
-    //     });
-    // },
+    fedLogout({ commit }) {
+        return new Promise(resolve => {
+            commit(types.RECEIVE_USER_ID, "");
+            commit(types.RECEIVE_TOKEN, "");
+            commit(types.RECEIVE_AUTH_RULES, []);
+            resolve();
+        });
+    },
     /**
      * 过滤路由列表
      * @param commit
      * @param data
      * @returns {Promise}
      */
-    // filterRouter({ commit }, data) {
-    //     const { accessedRouters } = data;
-    //     if (accessedRouters && accessedRouters.length > 0) {
-    //         commit(types.RECEIVE_ROUTERS, accessedRouters);
-    //     }
-    // }
+    filterRouter({ commit }, data) {
+        const { accessedRouters } = data;
+        if (accessedRouters && accessedRouters.length > 0) {
+            commit(types.RECEIVE_ROUTERS, accessedRouters);
+        }
+    }
 };
 
 // mutations
@@ -137,16 +122,27 @@ const mutations = {
             setUserId(userId);
         }
     },
+    [types.RECEIVE_TOKEN](state, token) {
+        state.token = token
+        if (token === "") {
+            removeToken();
+        } else {
+            setToken(token);
+        }
+    },
     [types.RECEIVE_USERNAME](state, username) {
         state.username = username
     },
     [types.RECEIVE_AVATAR](state, avatar) {
         state.avatar = avatar;
     },
-    // [types.RECEIVE_ROUTERS](state, routers) {
-    //     const tempRm = constantRouterMap.concat(routers);
-    //     state.routers = JSON.parse(JSON.stringify(tempRm));
-    // }
+    [types.RECEIVE_AUTH_RULES](state, authRules) {
+        state.authRules = authRules;
+    },
+    [types.RECEIVE_ROUTERS](state, routers) {
+        const tempRm = constantRouterMap.concat(routers);
+        state.routers = JSON.parse(JSON.stringify(tempRm));
+    }
 };
 
 export default {

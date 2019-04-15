@@ -83,7 +83,7 @@ import {
     authPermissionRuleTree,
     authPermissionRuleSave,
     authPermissionRuleDelete
-} from "../../../api/auth/authPermissionRule";
+} from "@/api/auth/authPermissionRule";
 const formJson = {
     id: "",
     pid: "2",
@@ -220,7 +220,7 @@ export default {
                     authPermissionRuleSave(data, this.formName)
                         .then(response => {
                             this.formLoading = false;
-                            if (response.code) {
+                            if (response.status) {
                                 this.$message.error(response.message);
                                 return false;
                             }
@@ -278,7 +278,7 @@ export default {
                         authPermissionRuleDelete(para)
                             .then(response => {
                                 this.deleteLoading = false;
-                                if (response.code) {
+                                if (response.status) {
                                     this.$message.error(response.message);
                                     return false;
                                 }

@@ -7,7 +7,7 @@ const index = {
         total: 1,
         list: [
             {
-                id: 1,
+                userId: 1,
                 username: "admin",
                 avatar: null,
                 tel: "admin",
@@ -41,13 +41,19 @@ const save = {
 };
 
 const edit = {
-    code: 0,
-    message: "success"
+    data: {
+        status: 0,
+        message: "success"
+    }
+    
 };
 
 const del = {
-    code: 0,
-    message: "success"
+    data: {
+        status: 0,
+        message: "success"
+    }
+    
 };
 
 export default {

@@ -20,18 +20,39 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
     response => {
-        const data = response.data
-        // if(data.status == 0) {
-        //     //
-        // }
-        return data
+        const res = response.data
+        // 根据状态码 同意提示处理
+        if(res.data.status == 0) {
+            if(!res.data.ignore){
+                Message({
+                    message: res.data.message,
+                    type: "success",
+                    duration: 3 * 1000
+                })
+            }
+        }
+        else if (res.data.status == -1) {
+            Message({
+                message: res.data.message,
+                type: "error",
+                duration: 3 * 1000
+            })
+        }
+        else {
+            Message({
+                message: res.data.message,
+                type: "warning",
+                duration: 3 * 1000
+            })
+        }
+        return res
     },
     error => {
         //  做一些错误提示
         Message({
             message: error.message,
             type: "error",
-            duration: 5 * 1000
+            duration: 3 * 1000
         });
         return Promise.reject(error);
     }

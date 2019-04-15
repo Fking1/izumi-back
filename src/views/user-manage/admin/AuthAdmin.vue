@@ -296,7 +296,7 @@ export default {
                     let data = Object.assign({}, this.formData);
                     authAdminSave(data, this.formName).then(response => {
                         this.formLoading = false;
-                        if (response.code) {
+                        if (response.status) {
                             this.$message.error(response.message);
                             return false;
                         }
@@ -329,7 +329,7 @@ export default {
                         authAdminDelete(para)
                             .then(response => {
                                 this.deleteLoading = false;
-                                if (response.code) {
+                                if (response.status) {
                                     this.$message.error(response.message);
                                     return false;
                                 }

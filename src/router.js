@@ -9,9 +9,14 @@ import TicketList from '@/views/ticket-manage/TicketList'
 import KycList from '@/views/kyc-manage/KycList'
 import TransactionList from '@/views/transaction-manage/TransactionList'
 import SystemList from '@/views/system-manage/SystemList'
+
+import AdminRouter from "@/views/user-manage/admin/router.vue";
+import AuthAdmin from "@/views/user-manage/admin/AuthAdmin.vue";
+import AuthRole from "@/views/user-manage/admin/AuthRole.vue";
+// import AuthPermissionRule from "@/views/user-manage/admin/AuthPermissionRule.vue";
 Vue.use(Router)
 
-export const routes = [
+export const constantRouterMap = [
   {
     path: '*',
     component: resolve => require(['@/views/error/err404.vue'], resolve),
@@ -172,8 +177,93 @@ export const routes = [
   // }
 ]
 
+export const asyncRouterMap = [
+  {
+    path: "/user-manage",
+    redirect: "/user-manage/admin-manage/index",
+    component: Home,
+    icon: "mingpian",
+    name: "用户管理",
+    meta: {
+      authRule: ["user_manage"]
+    },
+    children: [
+      {
+        path: "/user-manage/admin-manage",
+        component: AdminRouter,
+        redirect: "/user-manage/auth-admin/index",
+        name: "管理组",
+        icon: "0",
+        meta: {
+          authRule: ["user_manage/admin_manage"]
+        },
+        children: [
+          {
+            path: "auth-admin",
+            component: AuthAdmin,
+            name: "管理员管理",
+            icon: "0",
+            meta: {
+              authRule: ["admin/auth.admin/index"]
+            }
+          },
+          {
+            path: "auth-role",
+            component: AuthRole,
+            name: "角色管理",
+            icon: "jiaosefenpei",
+            meta: {
+              authRule: ["admin/auth.role/index"]
+            }
+          },
+          // {
+          //   path: "auth-permissionRule",
+          //   component: AuthPermissionRule,
+          //   name: "权限管理",
+          //   icon: "quanxianguanli",
+          //   meta: {
+          //     authRule: ["admin/auth.permission_rule/index"]
+          //   }
+          // }
+        ]
+      }
+    ]
+  },
+  // {
+  //   path: "/adManage",
+  //   redirect: "/adManage/adSite",
+  //   component: Home,
+  //   icon: "guanggao",
+  //   name: "广告相关",
+  //   meta: {
+  //     authRule: ["ad_manage"]
+  //   },
+  //   children: [
+  //     {
+  //       path: "adSite",
+  //       component: adSite,
+  //       name: "广告位管理",
+  //       icon: "0",
+  //       meta: {
+  //         authRule: ["admin/ad.site/index"]
+  //       }
+  //     },
+  //     {
+  //       path: "ad",
+  //       component: ad,
+  //       name: "广告管理",
+  //       icon: "0",
+  //       meta: {
+  //         authRule: ["admin/ad.ad/index"]
+  //       }
+  //     }
+  //   ]
+  // }
+];
+
+
 export default new Router({
-  routes: routes
+  routes: constantRouterMap
 })
 
 // import 和 resolve => require()策略的选择

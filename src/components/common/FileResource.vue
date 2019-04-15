@@ -195,7 +195,7 @@ export default {
                     };
                     fileResourceTagAdd(data)
                         .then(response => {
-                            if (response.code) {
+                            if (response.status) {
                                 this.$message({
                                     message: response.message,
                                     type: "error"
@@ -300,7 +300,7 @@ export default {
             this.getList();
         },
         handleSuccess(response, file, fileList) {
-            if (response.code) {
+            if (response.status) {
                 this.$message({
                     message: response.message,
                     type: "error"
@@ -328,7 +328,7 @@ export default {
             data.ext = fileName.substr(extIndex, fileName.length);
             fileResourceAdd(data)
                 .then(response => {
-                    if (response.code) {
+                    if (response.status) {
                         this.$message({
                             message: response.message,
                             type: "error"
