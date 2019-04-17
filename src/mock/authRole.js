@@ -14,30 +14,37 @@ const index = {
                 create_time: 1329633709,
                 listorder: 0
             }
-        ]
+        ],
+        status: 0,
+        ignore: true
     }
 };
 
 const save = {
     data: {
-        id: 2
+        status: 0,
+        id: 2,
+        message: "save success"
     }
 };
 
 const edit = { 
     data: {
-        status: 0, message: "success"
+        status: 0, 
+        message: "edit success"
     }
 };
 
 const del = { 
     data: {
-        status: 0, message: "success" 
+        status: 0, 
+        message: "del success" 
     }
 };
 
 const authList = {
     data: {
+        status: 0,
         auth_list: [
             {
                 id: 1,
@@ -233,7 +240,8 @@ const authList = {
 
 const auth = { 
     data: {
-        status: 0, message: "success" 
+        status: 0, 
+        message: "success" 
     }
 };
 

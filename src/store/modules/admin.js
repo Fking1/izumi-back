@@ -1,6 +1,6 @@
-import { login, logout, userInfo } from "../../api/auth/login";
+import { login, logout, getUserInfo } from "../../api/auth/login";
 import * as types from "../mutation-types";
-import {constantRouterMap} from "@/router.js";
+import {baseRouter} from "@/router.js";
 
 import {
     getUserId,
@@ -10,17 +10,15 @@ import {
     setToken,
     removeToken
 } from "../../utils/auth";
-// import { $NOT_NETWORK } from '../../utils/errorCode'
-import { Message } from "element-ui";
 
 // initial state
 const state = {
     userId: getUserId(), // id
     token: getToken(),
-    username: "", // 昵称
-    avatar: "",
+    username: '', // 昵称
+    avatar: '',
     authRules: [],
-    routers: constantRouterMap // 路由列表
+    routers: baseRouter // 路由列表
 };
 
 // getters
@@ -42,7 +40,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             login(username, password)
                 .then(response => {
-                    const data = response.data || {};
+                    let data = response.data || {};
                     if (!data.status) {
                         commit(types.RECEIVE_USER_ID, data.userId);
                         commit(types.RECEIVE_TOKEN, data.token);
@@ -57,7 +55,7 @@ const actions = {
     },
     userInfo({ commit }) {
         return new Promise((resolve, reject) => {
-            userInfo()
+            getUserInfo()
                 .then(response => {
                     const data = response.data || {};
                     commit(types.RECEIVE_USERNAME, data.username);
@@ -140,7 +138,7 @@ const mutations = {
         state.authRules = authRules;
     },
     [types.RECEIVE_ROUTERS](state, routers) {
-        const tempRm = constantRouterMap.concat(routers);
+        const tempRm = baseRouter.concat(routers);
         state.routers = JSON.parse(JSON.stringify(tempRm));
     }
 };

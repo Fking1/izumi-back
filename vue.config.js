@@ -1,5 +1,4 @@
 module.exports = {
-
     // 代理设置
     devServer: {
         proxy: {

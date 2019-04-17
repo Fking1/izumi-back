@@ -24,9 +24,9 @@ export function password(data) {
     })
 }
 
-export function userInfo() {
+export function getUserInfo() {
     return axios({
-        url: "/admin/auth/login/userInfo",
-        method: "get"
+        url: "/admin/auth/login/info",
+        method: "get",
     })
 }

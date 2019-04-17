@@ -84,6 +84,7 @@ import {
     authPermissionRuleSave,
     authPermissionRuleDelete
 } from "@/api/auth/authPermissionRule";
+
 const formJson = {
     id: "",
     pid: "2",
@@ -133,19 +134,19 @@ export default {
         };
     },
     methods: {
-        /*eslint-disable */
+        /* eslint-disable */
         renderContent (h, { node, data, store }) {
-            return (
-                <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
-                <span>
-                <span title={ data.name }>{node.label}</span>
-            </span>
-            <span>
-            <el-button style="font-size: 12px;" type="text" on-click={ () => this.handleForm(node, data, 'add') }>添加子菜单</el-button>
-            <el-button style="font-size: 12px;" type="text" on-click={ () => this.handleForm(node, data, 'edit') }>编辑</el-button>
-            <el-button style="font-size: 12px;" type="text" on-click={ () => this.handleDel(node, data) }>删除</el-button>
-            </span>
-            </span>)
+            // return (
+            //     <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
+            //     <span>
+            //     <span title={ data.name }>{node.label}</span>
+            // </span>
+            // <span>
+            // <el-button style="font-size: 12px;" type="text" on-click={ () => this.handleForm(node, data, 'add') }>添加子菜单</el-button>
+            // <el-button style="font-size: 12px;" type="text" on-click={ () => this.handleForm(node, data, 'edit') }>编辑</el-button>
+            // <el-button style="font-size: 12px;" type="text" on-click={ () => this.handleDel(node, data) }>删除</el-button>
+            // </span>
+            // </span>)
         },
         onReset() {
             this.$router.push({

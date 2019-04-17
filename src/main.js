@@ -10,7 +10,7 @@ import "@/role"; // 权限
 import "./assets/icons/iconfont";// 阿里iconfont图表库
 import IconSvg from "./components/common/IconSvg.vue"; // svg组件
 
-import '@/mock'
+import './mock'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)

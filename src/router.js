@@ -13,10 +13,14 @@ import SystemList from '@/views/system-manage/SystemList'
 import AdminRouter from "@/views/user-manage/admin/router.vue";
 import AuthAdmin from "@/views/user-manage/admin/AuthAdmin.vue";
 import AuthRole from "@/views/user-manage/admin/AuthRole.vue";
-// import AuthPermissionRule from "@/views/user-manage/admin/AuthPermissionRule.vue";
+import AuthPermissionRule from "@/views/user-manage/admin/AuthPermissionRule.vue";
+
+import AdSite from "@/views/ad-manage/AdSite.vue"
+import Ad from '@/views/ad-manage/Ad.vue'
+
 Vue.use(Router)
 
-export const constantRouterMap = [
+export const baseRouter = [
   {
     path: '*',
     component: resolve => require(['@/views/error/err404.vue'], resolve),
@@ -67,7 +71,10 @@ export const constantRouterMap = [
         hidden: false
       }
     ]
-  },
+  }
+]
+
+export const ticketManageRouter = [
   {
     path: "/ticket-manage",
     component: Home,
@@ -81,7 +88,10 @@ export const constantRouterMap = [
         component: TicketList
       }
     ]
-  },
+  }
+]
+
+export const kycManageRouter = [
   {
     path: "/kyc-manage",
     component: Home,
@@ -95,7 +105,10 @@ export const constantRouterMap = [
         component: KycList
       }
     ]
-  },
+  }
+]
+
+export const transactionManageRouter = [
   {
     path: "/transaction-manage",
     component: Home,
@@ -109,7 +122,10 @@ export const constantRouterMap = [
         component: TransactionList
       }
     ]
-  },
+  }
+]
+
+export const systemManageRouter = [
   {
     path: "/system-manage",
     component: Home,
@@ -123,61 +139,44 @@ export const constantRouterMap = [
         component: SystemList
       }
     ]
-  },
-  // {
-  //   path: "/user-manage",
-  //   redirect: "/user-manage/admin-manage/index",
-  //   component: Home,
-  //   icon: "mingpian",
-  //   name: "用户管理",
-  //   meta: {
-  //     authRule: ["user_manage"]
-  //   },
-  //   children: [
-  //     {
-  //       path: "/user-manage/admin-manage",
-  //       component: adminRouter,
-  //       redirect: "/user-manage/auth-admin/index",
-  //       name: "管理组",
-  //       icon: "0",
-  //       meta: {
-  //         authRule: ["user_manage/admin_manage"]
-  //       },
-  //       children: [
-  //         {
-  //           path: "auth-admin",
-  //           component: authAdmin,
-  //           name: "管理员管理",
-  //           icon: "0",
-  //           meta: {
-  //             authRule: ["admin/auth.admin/index"]
-  //           }
-  //         },
-  //         {
-  //           path: "authRole",
-  //           component: authRole,
-  //           name: "角色管理",
-  //           icon: "jiaosefenpei",
-  //           meta: {
-  //             authRule: ["admin/auth.role/index"]
-  //           }
-  //         },
-  //         {
-  //           path: "authPermissionRule",
-  //           component: authPermissionRule,
-  //           name: "权限管理",
-  //           icon: "quanxianguanli",
-  //           meta: {
-  //             authRule: ["admin/auth.permission_rule/index"]
-  //           }
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
+  }
 ]
 
-export const asyncRouterMap = [
+export const adManageRouter = [
+  {
+    path: "/ad-manage",
+    redirect: "/ad-manage/ad-site",
+    component: Home,
+    icon: "shouye",
+    name: "广告相关",
+    meta: {
+      authRule: ["ad_manage"]
+    },
+    children: [
+      {
+        path: "ad-site",
+        component: AdSite,
+        name: "广告位管理",
+        icon: "shouye",
+        meta: {
+          authRule: ["admin/ad.site/index"]
+        }
+      },
+      {
+        path: "ad",
+        component: Ad,
+        name: "广告管理",
+        icon: "shouye",
+        meta: {
+          authRule: ["admin/ad.ad/index"]
+        }
+      }
+    ]
+  }
+]
+
+
+export const userManageRouter = [
   {
     path: "/user-manage",
     redirect: "/user-manage/admin-manage/index",
@@ -193,7 +192,7 @@ export const asyncRouterMap = [
         component: AdminRouter,
         redirect: "/user-manage/auth-admin/index",
         name: "管理组",
-        icon: "0",
+        icon: "shouye",
         meta: {
           authRule: ["user_manage/admin_manage"]
         },
@@ -202,7 +201,7 @@ export const asyncRouterMap = [
             path: "auth-admin",
             component: AuthAdmin,
             name: "管理员管理",
-            icon: "0",
+            icon: "shouye",
             meta: {
               authRule: ["admin/auth.admin/index"]
             }
@@ -211,59 +210,29 @@ export const asyncRouterMap = [
             path: "auth-role",
             component: AuthRole,
             name: "角色管理",
-            icon: "jiaosefenpei",
+            icon: "shouye",
             meta: {
               authRule: ["admin/auth.role/index"]
             }
           },
-          // {
-          //   path: "auth-permissionRule",
-          //   component: AuthPermissionRule,
-          //   name: "权限管理",
-          //   icon: "quanxianguanli",
-          //   meta: {
-          //     authRule: ["admin/auth.permission_rule/index"]
-          //   }
-          // }
+          {
+            path: "auth-permissionRule",
+            component: AuthPermissionRule,
+            name: "权限管理",
+            icon: "shouye",
+            meta: {
+              authRule: ["admin/auth.permission_rule/index"]
+            }
+          }
         ]
       }
     ]
-  },
-  // {
-  //   path: "/adManage",
-  //   redirect: "/adManage/adSite",
-  //   component: Home,
-  //   icon: "guanggao",
-  //   name: "广告相关",
-  //   meta: {
-  //     authRule: ["ad_manage"]
-  //   },
-  //   children: [
-  //     {
-  //       path: "adSite",
-  //       component: adSite,
-  //       name: "广告位管理",
-  //       icon: "0",
-  //       meta: {
-  //         authRule: ["admin/ad.site/index"]
-  //       }
-  //     },
-  //     {
-  //       path: "ad",
-  //       component: ad,
-  //       name: "广告管理",
-  //       icon: "0",
-  //       meta: {
-  //         authRule: ["admin/ad.ad/index"]
-  //       }
-  //     }
-  //   ]
-  // }
+  }
 ];
 
 
 export default new Router({
-  routes: constantRouterMap
+  routes: baseRouter
 })
 
 // import 和 resolve => require()策略的选择

@@ -13,6 +13,7 @@ export function authPermissionRuleList(query) {
         params: query
     });
 }
+
 // 获取树形列表
 export function authPermissionRuleTree(query) {
     return axios({

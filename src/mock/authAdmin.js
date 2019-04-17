@@ -1,18 +1,20 @@
 /**
- * Created by lk on 18/4/28.
+ * Created by fking on 19/4/14.
  */
 
 const index = {
     data: {
         total: 1,
+        status: 0,
+        ignore: true,
         list: [
             {
                 userId: 1,
                 username: "admin",
                 avatar: null,
                 tel: "admin",
-                email: "lmxdawn@gmail.com",
                 status: 1,
+                email: "fangyong137@gmail.com",
                 last_login_ip: "127.0.0.1",
                 last_login_time: 1493103488,
                 create_time: 1487868050,
@@ -25,6 +27,8 @@ const index = {
 const roleList = {
     data: {
         total: 1,
+        status: 0,
+        ignore: true,
         list: [
             {
                 id: 1,
@@ -36,14 +40,16 @@ const roleList = {
 
 const save = {
     data: {
-        id: 2
+        status: 0,
+        id: 2,
+        message: "保存success"
     }
 };
 
 const edit = {
     data: {
         status: 0,
-        message: "success"
+        message: "修改success"
     }
     
 };
@@ -51,7 +57,7 @@ const edit = {
 const del = {
     data: {
         status: 0,
-        message: "success"
+        message: "删除success"
     }
     
 };

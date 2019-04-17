@@ -21,9 +21,9 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
-        // 根据状态码 同意提示处理
+        // 根据状态码 统一提示处理
         if(res.data.status == 0) {
-            if(!res.data.ignore){
+            if (res.data.ignore !=true) {
                 Message({
                     message: res.data.message,
                     type: "success",
@@ -45,7 +45,7 @@ service.interceptors.response.use(
                 duration: 3 * 1000
             })
         }
-        return res
+        return res;
     },
     error => {
         //  做一些错误提示

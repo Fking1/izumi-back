@@ -1,10 +1,12 @@
 const index = {
     data: {
+        status: 0,
+        ignore: true,
         total: 1,
         list: [
             {
                 site_id: 1,
-                site_name: "测试12222111",
+                site_name: "banner广告",
                 describe: "支持android和ios",
                 ad_ids: [4, 1],
                 ads: [
@@ -24,27 +26,21 @@ const index = {
             },
             {
                 site_id: 2,
-                site_name: "车是是是",
-                describe: "车是是是发发发",
-                ad_ids: [1, 2, 4],
+                site_name: "banner广告",
+                describe: "支持android和ios",
+                ad_ids: [4, 1],
                 ads: [
-                    {
-                        ad_id: 1,
-                        title: "阿范德萨",
-                        describe: "撒地方士大夫",
-                        status: 1
-                    },
-                    {
-                        ad_id: 2,
-                        title: "ffff",
-                        describe: "fff",
-                        status: 0
-                    },
                     {
                         ad_id: 4,
                         title: "fffxxxx",
                         describe: "vvv",
                         status: 0
+                    },
+                    {
+                        ad_id: 1,
+                        title: "阿范德萨",
+                        describe: "撒地方士大夫",
+                        status: 1
                     }
                 ]
             }

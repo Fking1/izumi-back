@@ -1,9 +1,11 @@
 /**
- * Created by lk on 18/4/28.
+ * Created by fking on 19/4/17.
  */
 
 const index = {
     data: {
+        status: 0,
+        ignore: true,
         list: [
             {
                 id: 1,
@@ -200,50 +202,52 @@ const index = {
                 level: 1,
                 html: "&nbsp;"
             },
-            {
-                id: 16,
-                pid: 0,
-                name: "setting",
-                title: "设置",
-                status: 1,
-                condition: "",
-                listorder: 999,
-                children: [
-                    {
-                        id: 17,
-                        pid: 16,
-                        name: "admin/wxconf/index",
-                        title: "小程序",
-                        status: 1,
-                        condition: "",
-                        listorder: 999,
-                        children: [
-                            {
-                                id: 18,
-                                pid: 17,
-                                name: "admin/wxconf/save",
-                                title: "保存修改",
-                                status: 1,
-                                condition: "",
-                                listorder: 999,
-                                children: [],
-                                level: 3,
-                                html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
-                            }
-                        ],
-                        level: 2,
-                        html: "&nbsp;&nbsp;├&nbsp;"
-                    }
-                ],
-                level: 1,
-                html: "&nbsp;"
-            }
+            // {
+            //     id: 16,
+            //     pid: 0,
+            //     name: "setting",
+            //     title: "设置",
+            //     status: 1,
+            //     condition: "",
+            //     listorder: 999,
+            //     children: [
+            //         {
+            //             id: 17,
+            //             pid: 16,
+            //             name: "admin/wxconf/index",
+            //             title: "小程序",
+            //             status: 1,
+            //             condition: "",
+            //             listorder: 999,
+            //             children: [
+            //                 {
+            //                     id: 18,
+            //                     pid: 17,
+            //                     name: "admin/wxconf/save",
+            //                     title: "保存修改",
+            //                     status: 1,
+            //                     condition: "",
+            //                     listorder: 999,
+            //                     children: [],
+            //                     level: 3,
+            //                     html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
+            //                 }
+            //             ],
+            //             level: 2,
+            //             html: "&nbsp;&nbsp;├&nbsp;"
+            //         }
+            //     ],
+            //     level: 1,
+            //     html: "&nbsp;"
+            // }
         ]
     }
 };
 
 const tree = {
     data: {
+        status: 0,
+        ignore: true,
         list: [
             {
                 id: 1,
@@ -891,87 +895,88 @@ const tree = {
                 level: 4,
                 html: "&nbsp;&nbsp;│&nbsp;│&nbsp;├&nbsp;"
             },
-            {
-                id: 16,
-                pid: 0,
-                name: "setting",
-                title: "设置",
-                status: 1,
-                condition: "",
-                listorder: 999,
-                children: [
-                    {
-                        id: 17,
-                        pid: 16,
-                        name: "admin/wxconf/index",
-                        title: "小程序",
-                        status: 1,
-                        condition: "",
-                        listorder: 999,
-                        children: [
-                            {
-                                id: 18,
-                                pid: 17,
-                                name: "admin/wxconf/save",
-                                title: "保存修改",
-                                status: 1,
-                                condition: "",
-                                listorder: 999,
-                                children: [],
-                                level: 3,
-                                html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
-                            }
-                        ],
-                        level: 2,
-                        html: "&nbsp;&nbsp;├&nbsp;"
-                    }
-                ],
-                level: 1,
-                html: "&nbsp;"
-            },
-            {
-                id: 17,
-                pid: 16,
-                name: "admin/wxconf/index",
-                title: "小程序",
-                status: 1,
-                condition: "",
-                listorder: 999,
-                children: [
-                    {
-                        id: 18,
-                        pid: 17,
-                        name: "admin/wxconf/save",
-                        title: "保存修改",
-                        status: 1,
-                        condition: "",
-                        listorder: 999,
-                        children: [],
-                        level: 3,
-                        html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
-                    }
-                ],
-                level: 2,
-                html: "&nbsp;&nbsp;├&nbsp;"
-            },
-            {
-                id: 18,
-                pid: 17,
-                name: "admin/wxconf/save",
-                title: "保存修改",
-                status: 1,
-                condition: "",
-                listorder: 999,
-                children: [],
-                level: 3,
-                html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
-            }
+            // {
+            //     id: 16,
+            //     pid: 0,
+            //     name: "setting",
+            //     title: "设置",
+            //     status: 1,
+            //     condition: "",
+            //     listorder: 999,
+            //     children: [
+            //         {
+            //             id: 17,
+            //             pid: 16,
+            //             name: "admin/wxconf/index",
+            //             title: "小程序",
+            //             status: 1,
+            //             condition: "",
+            //             listorder: 999,
+            //             children: [
+            //                 {
+            //                     id: 18,
+            //                     pid: 17,
+            //                     name: "admin/wxconf/save",
+            //                     title: "保存修改",
+            //                     status: 1,
+            //                     condition: "",
+            //                     listorder: 999,
+            //                     children: [],
+            //                     level: 3,
+            //                     html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
+            //                 }
+            //             ],
+            //             level: 2,
+            //             html: "&nbsp;&nbsp;├&nbsp;"
+            //         }
+            //     ],
+            //     level: 1,
+            //     html: "&nbsp;"
+            // },
+            // {
+            //     id: 17,
+            //     pid: 16,
+            //     name: "admin/wxconf/index",
+            //     title: "小程序",
+            //     status: 1,
+            //     condition: "",
+            //     listorder: 999,
+            //     children: [
+            //         {
+            //             id: 18,
+            //             pid: 17,
+            //             name: "admin/wxconf/save",
+            //             title: "保存修改",
+            //             status: 1,
+            //             condition: "",
+            //             listorder: 999,
+            //             children: [],
+            //             level: 3,
+            //             html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
+            //         }
+            //     ],
+            //     level: 2,
+            //     html: "&nbsp;&nbsp;├&nbsp;"
+            // },
+            // {
+            //     id: 18,
+            //     pid: 17,
+            //     name: "admin/wxconf/save",
+            //     title: "保存修改",
+            //     status: 1,
+            //     condition: "",
+            //     listorder: 999,
+            //     children: [],
+            //     level: 3,
+            //     html: "&nbsp;&nbsp;│&nbsp;└&nbsp;"
+            // }
         ]
     }
 };
 
 const save = {
     data: {
+        status: 0, 
         id: 999
     }
 };
@@ -985,7 +990,8 @@ const edit = {
 
 const del = { 
     data: {
-        status: 0, message: "success"
+        status: 0, 
+        message: "success"
     }
 };
 

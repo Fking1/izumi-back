@@ -35,7 +35,7 @@
             max-height="500">
             <el-table-column
                 label="用户 ID"
-                prop="id"
+                prop="userId"
                 fixed>
             </el-table-column>
             <el-table-column

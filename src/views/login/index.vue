@@ -113,7 +113,7 @@ $light_gray: #eee;
     height: 100%;
     background-color: $bg;
     input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 1000px #293444 inset !important;
+        // -webkit-box-shadow: 0 0 0 1000px #293444 inset !important;
         -webkit-text-fill-color: #fff !important;
     }
     .item {
@@ -174,11 +174,6 @@ $light_gray: #eee;
         font-size: 16px;
         color: $dark_gray;
         cursor: pointer;
-    }
-    .thirdparty-button {
-        /*position: absolute;*/
-        /*right: .4666rem;*/
-        /*bottom: .37333rem;*/
     }
 }
 </style>
