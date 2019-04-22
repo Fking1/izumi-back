@@ -108,6 +108,25 @@ export const kycManageRouter = [
   }
 ]
 
+export const projectManageRouter = [
+  {
+    path: "/project-manage",
+    component: Home,
+    redirect: "/project-manage/project-list",
+    icon: "shouye",
+    name: "项目管理",
+    noDropdown: true,
+    children: [
+      {
+        path: "project-list",
+        component: function() {
+          return import('@/views/project-manage/ProjectList')
+        }
+      }
+    ]
+  }
+]
+
 export const transactionManageRouter = [
   {
     path: "/transaction-manage",

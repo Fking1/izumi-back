@@ -13,6 +13,7 @@ import authRole from "./authRole";
 // import fileResource from "./fileResource";
 import adSite from "./adSite";
 import ad from "./ad";
+import project from './project';
 
 // 登录相关
 Mock.mock(/\/admin\/auth\/login\/out/, "post", login.out);
@@ -94,5 +95,12 @@ Mock.mock(/\/admin\/ad\/ad\/index/, "get", ad.index);
 Mock.mock(/\/admin\/ad\/ad\/save/, "post", ad.save);
 Mock.mock(/\/admin\/ad\/ad\/edit/, "post", ad.edit);
 Mock.mock(/\/admin\/ad\/ad\/delete/, "post", ad.del);
+
+//项目相关
+Mock.mock(/\/manage\/project\/getProject/, "post", project.getProject);
+Mock.mock(/\/manage\/project\/getProjectByName/, "post", project.getProjectByName);
+Mock.mock(/\/manage\/project\/list/, "post", project.list);
+Mock.mock(/\/manage\/project\/remove/, "post", project.remove);
+Mock.mock(/\/manage\/project\/insert/, "post", project.insert);
 
 export default Mock;

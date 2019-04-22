@@ -4,7 +4,7 @@ import "nprogress/nprogress.css"; // Progress 进度条样式
 import { getUserId } from "./utils/auth"; // 验权
 import { Message } from "element-ui";
 import router from '@/router.js'
-import { ticketManageRouter, kycManageRouter, transactionManageRouter, systemManageRouter, adManageRouter, userManageRouter} from "./router.js";
+import { ticketManageRouter, kycManageRouter, projectManageRouter, transactionManageRouter, systemManageRouter, adManageRouter, userManageRouter} from "./router.js";
 
 // permissiom judge
 function hasRole(authRules) {
@@ -26,6 +26,10 @@ function generateRouter(authRules) {
 
         if (authRules[item] == "kycManageRouter") {
             accessRouter = accessRouter.concat(kycManageRouter)
+        }
+
+        if (authRules[item] == "projectManageRouter") {
+            accessRouter = accessRouter.concat(projectManageRouter)
         }
 
         if (authRules[item] == "transactionManageRouter") {
@@ -76,9 +80,9 @@ router.beforeEach((to, from, next) => {
         return;
     }
     let userId = getUserId();
-    if(userId === "undefined" || userId ==="" || !userId) {
-        this.PushManager("/")
-    }
+    // if(userId === "undefined" || userId ==="" || !userId) {
+    //     this.push("/")
+    // }
 
     if (userId !== "undefined" && userId !== "" && userId) {
         // 判断是否有token

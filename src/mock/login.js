@@ -18,7 +18,7 @@ const info = {
         status: 0,
         username: "admin",
         avatar: "",
-        authRules: ["ticketManageRouter", "kycManageRouter","transactionManageRouter","systemManageRouter","adManageRouter","userManageRouter"],
+        authRules: ["ticketManageRouter", "kycManageRouter","projectManageRouter","transactionManageRouter","systemManageRouter","adManageRouter","userManageRouter"],
         message: "获取用户信息成功",
         token:
             "eyJpZHNzIjoiJDJ5JDEwJGNmMVpVb3BxM2lEUUk0bllVZXkxenUzajM0QVJlYmEuS3B4aDZ1MkNkY1J4clF6SE10MTRLIn0=_2018-04-27",
